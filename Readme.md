@@ -1,17 +1,18 @@
 # Fashion-Items Project
 
 ## Team Name
-YourTeamName
+TrendSetters
 
 ## Team Members
 - Rajveer Kaur
-- Member 2
-- Member 3
+- Jaskomal Kaur
+- Rishi Kumar
 
 ## Project Description
-This project is a fashion items catalog where users can browse, filter, and view details of fashion products.
+This project is a fashion items catalog where users can browse, filter, and view details of fashion products, including clothing, accessories, footwear, and more.
 
 ## User Stories
-1. As a shopper, I want to browse fashion items so I can see what’s available.
-2. As a customer, I want to filter items by category so I can find what I want faster.
-3. As an admin, I want to add or update fashion items so the catalog stays current.
+1. As a user, I want to browse fashion categories, so that I can find items I like.
+2. As a user, I want to see all items in a category, so that I can explore options before choosing.
+3. As an admin, I want to add or update fashion items, so that the catalog stays current.
+4. As a user, I want a clear header and footer, so that I know which team created the app.
