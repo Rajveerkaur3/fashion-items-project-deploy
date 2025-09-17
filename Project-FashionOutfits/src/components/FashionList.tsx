@@ -32,7 +32,8 @@ const categories: FashionCategory[] = [
     items: ['Bags: handbags, backpacks, clutches', 'Jewelry: necklaces, earrings, bracelets', 'Belts', 'Sunglasses', 'Watches', 'Hats', 'Caps', 'Scarves', 'Gloves']
   },
   {
-    name: 'Undergarments & Sleepwear',
+    name: 'Undergarments & Sl
+    eepwear',
     items: ['Bras', 'Panties', 'Boxers', 'Briefs', 'Pajamas', 'Nightgowns', 'Robes', 'Socks', 'Tights', 'Leggings']
   },
   {
