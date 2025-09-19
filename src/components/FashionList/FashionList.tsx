@@ -57,7 +57,7 @@ const FashionList = () => {
           <h2>{category.name}</h2>
           <ul>
             {category.items.map((item, idx) => (
-              <li key={idx}>{item}</li>
+              <li key={idx} className="item-card">{item}</li>
             ))}
           </ul>
         </section>

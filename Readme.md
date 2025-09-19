@@ -1,7 +1,7 @@
 # Fashion-Items Project
 
 ## Team Name
-TrendSetters
+TrendAura
 
 ## Team Members
 - Rajveer Kaur
