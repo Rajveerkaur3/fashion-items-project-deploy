@@ -1,0 +1,55 @@
+{
+<<<<<<< HEAD
+  "name": "project-fashionoutfits",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+=======
+  "name": "fashion-items-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajveerkaur3/fashion-items-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rajveerkaur3/fashion-items-project/issues"
+  },
+  "homepage": "https://github.com/Rajveerkaur3/fashion-items-project#readme",
+>>>>>>> origin/layout-jaskomal-kaur
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+<<<<<<< HEAD
+    "@eslint/js": "^9.33.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.39.1",
+    "vite": "^7.1.2"
+=======
+    "@vitejs/plugin-react": "^5.0.3",
+    "vite": "^7.1.6"
+>>>>>>> origin/layout-jaskomal-kaur
+  }
+}
