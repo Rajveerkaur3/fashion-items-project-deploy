@@ -6,10 +6,10 @@ export function CustomerReviews() {
 
   const addReview = (e: React.FormEvent) => {
     e.preventDefault();
-    if (text === "") return; // do nothing if empty
+    if (text === "") return; 
 
     setReviews([text, ...reviews]);
-    setText(""); // clear box
+    setText(""); 
   };
 
   return (
