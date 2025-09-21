@@ -1,15 +1,17 @@
-import { useState } from "react";
 import "./Newsletter.css";
 
 const Newsletter = () => {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
   const handleSubscribe = () => {
-    if (email) {
-      setSubmitted(true);
-      setEmail("");
-      alert("Thank you! You will receive new sale updates.");
+    
+    const input = document.getElementById("email-input") as HTMLInputElement;
+    const message = document.getElementById("thankyou-msg");
+
+    if (input.value) {
+      alert(`Thanks! ${input.value} will receive sale updates.`);
+      input.value = "";
+      if (message) {
+        message.textContent = "Thanks for subscribing! 🎉";
+      }
     } else {
       alert("Please enter your email!");
     }
@@ -20,12 +22,11 @@ const Newsletter = () => {
       <h3>Subscribe for New Sale Updates!</h3>
       <input
         type="email"
+        id="email-input"
         placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
       />
       <button onClick={handleSubscribe}>Subscribe</button>
-      {submitted && <p>Thanks for subscribing! 🎉</p>}
+      <p id="thankyou-msg"></p>
     </div>
   );
 };
