@@ -1,32 +1,40 @@
+import { useState } from "react";
 import "./Newsletter.css";
 
 const Newsletter = () => {
-  const handleSubscribe = () => {
-    
-    const input = document.getElementById("email-input") as HTMLInputElement;
-    const message = document.getElementById("thankyou-msg");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-    if (input.value) {
-      alert(`Thanks! ${input.value} will receive sale updates.`);
-      input.value = "";
-      if (message) {
-        message.textContent = "Thanks for subscribing! 🎉";
-      }
+  const handleSubscribe = () => {
+    if (email.trim()) {
+      setMessage(`🎉 Thanks, ${email}! You’re subscribed for updates.`);
+      setEmail("");
     } else {
-      alert("Please enter your email!");
+      setMessage("⚠️ Please enter a valid email address!");
     }
   };
 
   return (
     <div className="newsletter">
-      <h3>Subscribe for New Sale Updates!</h3>
-      <input
-        type="email"
-        id="email-input"
-        placeholder="Enter your email"
-      />
-      <button onClick={handleSubscribe}>Subscribe</button>
-      <p id="thankyou-msg"></p>
+      <h3>Stay Updated on New Sales!</h3>
+      <p className="newsletter-subtext">
+        Subscribe to get the latest deals straight to your inbox.
+      </p>
+
+      <div className="newsletter-form">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          className="newsletter-input"
+        />
+        <button onClick={handleSubscribe} className="newsletter-btn">
+          Subscribe
+        </button>
+      </div>
+
+      {message && <p className="newsletter-msg">{message}</p>}
     </div>
   );
 };
