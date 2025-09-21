@@ -1,0 +1,15 @@
+.fashion-list {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.fashion-video,
+.fashion-card img {
+  width: 700px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+
+
