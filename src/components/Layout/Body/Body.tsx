@@ -17,6 +17,7 @@ export const Body = () => {
       <FashionList />
        <AboutUs />
       <DiscountOffers />
+      
     </main>
   );
 };

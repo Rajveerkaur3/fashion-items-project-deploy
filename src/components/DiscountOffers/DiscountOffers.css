@@ -1,23 +1,43 @@
 .discount-offers {
-  padding: 1rem;
-  background-color: #f9f9f9;
-  color: black;
-  border-radius: 8px;
-  max-width: 400px;
-  margin: 1rem auto;
+  padding: 2rem;
+  max-width: 700px; /* a bit wider to fit 2 images per row */
+  margin: 2rem auto;
   font-family: Arial, sans-serif;
 }
 
 .discount-offers h2 {
-  color: black;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: black;
 }
 
-.discount-offers p {
+/* 2x2 grid layout */
+.offers-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 1.5rem; /* space between cards */
+}
+
+.offer-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #fff7e6;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.offer-card img.offer-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.offer-card p {
+  font-weight: bold;
   color: black;
-  font-size: 1rem;
-  margin: 0.25rem 0;
+  margin: 0;
 }
