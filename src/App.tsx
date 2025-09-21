@@ -1,21 +1,19 @@
-import FashionList from "./components/FashionList/FashionList";
+import { Routes, Route } from "react-router-dom";
+import { Layout } from "../src/components/Layout/Layout";
+import FashionList from "../src/components/FashionList/FashionList";
+import { AboutUs } from "./components/Page sections/AboutUs";
+import { CustomerReviews } from "./components/Page sections/CustomerReviews";
 
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <h1>Fashion-Items-Project</h1>
-        <p>Team: Rajveer Kaur, Jaskomal Kaur, Rishi Kumar</p>
-      </header>
-      <main>
-        <FashionList />
-      </main>
-      <footer>
-        <p>Team Members: Rajveer Kaur, Jaskomal Kaur, Rishi Kumar</p>
-      </footer>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<FashionList />} />
+        <Route path="about-us" element={<AboutUs />} />
+        <Route path="reviews" element={<CustomerReviews />} />
+      </Route>
+    </Routes>
   );
 }
 

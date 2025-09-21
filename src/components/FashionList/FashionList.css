@@ -3,25 +3,13 @@
   font-family: Arial, sans-serif;
 }
 
-.category {
-  margin-bottom: 30px;
-  border: 2px solid #ccc;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+.fashion-video,
+.fashion-card img {
+  width: 700px;
+  height: auto;
+  object-fit: cover;
+  display: block;
 }
 
-.category h2 {
-  color: #d6336c;
-  margin-bottom: 10px;
-}
 
-.category ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
 
-.category li {
-  margin-bottom: 5px;
-  color: #333;
-}

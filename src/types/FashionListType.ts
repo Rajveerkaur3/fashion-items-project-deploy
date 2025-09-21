@@ -5,7 +5,6 @@ export interface FashionItem {
   name: string;
   category: FashionCategoryType;  
   description?: string;
-  sizeOptions?: string[];
   colors?: string[];
   price?: number;
   image?: string;
