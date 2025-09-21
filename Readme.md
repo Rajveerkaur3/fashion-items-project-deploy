@@ -9,7 +9,7 @@ TrendAura
 - Rishi Kumar
 
 ## Project Description
-This project is a fashion items catalog where users can browse, filter, and view details of fashion products, including clothing, accessories, footwear, and more.
+This project is a fashion items catalog where users can browse, filter, and view details of fashion products, including clothing, accessories, shoes and more.
 
 ## User Stories
 1. As a user, I want to browse fashion categories, so that I can find items I like.
