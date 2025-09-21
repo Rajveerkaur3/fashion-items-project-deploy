@@ -1,0 +1,30 @@
+.newsletter {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.newsletter input {
+  padding: 0.5rem;
+  width: 60%;
+  border-radius: 5px;
+  border: 1px solid #c4bdbd;
+  margin-right: 0.5rem;
+}
+
+.newsletter button {
+  padding: 0.5rem 1rem;
+  background-color: #ff6600;
+  color: rgb(69, 7, 7);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.newsletter button:hover {
+  background-color: #e65c00;
+}
+
+.newsletter p {
+  margin-top: 0.5rem;
+  color: green;
+}
