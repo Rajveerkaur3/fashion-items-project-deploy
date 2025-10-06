@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 export function CustomerReviews() {
   const [reviews, setReviews] = useState<string[]>([]);
   const [text, setText] = useState("");
 
-  const addReview = (e: React.FormEvent) => {
+  const addReview = (e: FormEvent) => {
     e.preventDefault();
-    if (text === "") return; 
+    if (text === "") return;
 
     setReviews([text, ...reviews]);
-    setText(""); 
+    setText("");
+  };
+
+  const removeReview = (index: number) => {
+    const updated = reviews.filter((_, i) => i !== index);
+    setReviews(updated);
   };
 
   return (
@@ -23,7 +28,7 @@ export function CustomerReviews() {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button type="submit">Add</button>
+        <button type="submit">Add Review</button>
       </form>
 
       {reviews.length === 0 ? (
@@ -31,7 +36,9 @@ export function CustomerReviews() {
       ) : (
         <ul>
           {reviews.map((r, i) => (
-            <li key={i}>{r}</li>
+            <li key={i}>
+              {r} <button onClick={() => removeReview(i)}>Remove</button>
+            </li>
           ))}
         </ul>
       )}
