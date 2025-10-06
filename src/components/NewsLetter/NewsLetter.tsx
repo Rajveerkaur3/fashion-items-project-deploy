@@ -14,7 +14,7 @@ const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments
     if (email.trim()) {
       setMessage(`🎉 Thanks, ${email}! You’re subscribed for updates.`);
       setEmail("");
-      setTotalComments(totalComments + 1); // update shared state
+      setTotalComments(totalComments + 1); 
     } else {
       setMessage("⚠️ Please enter a valid email address!");
     }
