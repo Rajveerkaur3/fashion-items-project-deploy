@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo-wrap img {
+  height: 80px;
+  width: auto;
+}
+
+.page-links {
+  display: flex;
+  gap: 25px;
+}
+
+.page-links a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.page-links a:hover {
+  color: #e91e63;
+}

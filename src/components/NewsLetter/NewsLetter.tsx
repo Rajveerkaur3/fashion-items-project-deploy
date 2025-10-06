@@ -1,7 +1,12 @@
 import { useState } from "react";
 import "./Newsletter.css";
 
-const Newsletter = () => {
+interface NewsletterProps {
+  totalComments: number;
+  setTotalComments: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments }) => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
@@ -9,6 +14,7 @@ const Newsletter = () => {
     if (email.trim()) {
       setMessage(`🎉 Thanks, ${email}! You’re subscribed for updates.`);
       setEmail("");
+      setTotalComments(totalComments + 1); // update shared state
     } else {
       setMessage("⚠️ Please enter a valid email address!");
     }
@@ -35,6 +41,7 @@ const Newsletter = () => {
       </div>
 
       {message && <p className="newsletter-msg">{message}</p>}
+      <p>Total subscribers: {totalComments}</p>
     </div>
   );
 };
