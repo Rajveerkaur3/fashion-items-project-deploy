@@ -15,14 +15,14 @@ const offers = [
 const DiscountOffers: React.FC = () => {
   const [savedCoupons, setSavedCoupons] = useState<string[]>([]);
 
-  // Save coupon
+  // Save coupon.
   const handleSave = (coupon: string) => {
     if (!savedCoupons.includes(coupon)) {
       setSavedCoupons([...savedCoupons, coupon]);
     }
   };
 
-  // Remove coupon
+  // Remove coupon.
   const handleRemove = (coupon: string) => {
     setSavedCoupons(savedCoupons.filter((c) => c !== coupon));
   };
