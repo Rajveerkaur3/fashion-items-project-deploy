@@ -1,47 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Newsletter.css";
+import { NewsletterRepository } from "../../repositories/NewsletterRepository";
+import type { NewsletterSubscriber } from "../../data/NewsletterSubscriber";
 
-interface NewsletterProps {
-  totalComments: number;
-  setTotalComments: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments }) => {
+const Newsletter: React.FC = () => {
+  const newsletterRepo = new NewsletterRepository();
+  const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  // Load initial test data
+  useEffect(() => {
+    setSubscribers(newsletterRepo.getAll());
+  }, []);
+
   const handleSubscribe = () => {
-    if (email.trim()) {
-      setMessage(`🎉 Thanks, ${email}! You’re subscribed for updates.`);
-      setEmail("");
-      setTotalComments(totalComments + 1); 
-    } else {
-      setMessage("⚠️ Please enter a valid email address!");
+    if (!email.trim()) {
+      setMessage("⚠️ Please enter a valid email!");
+      return;
     }
+
+    const newSub = newsletterRepo.add(email);
+    if (!newSub) {
+      setMessage("⚠️ You are already subscribed!");
+      return;
+    }
+
+    setSubscribers([...subscribers, newSub]);
+    setMessage(`🎉 Thanks, ${email}! You’re subscribed.`);
+    setEmail("");
   };
 
   return (
     <div className="newsletter">
       <h3>Stay Updated on New Sales!</h3>
-      <p className="newsletter-subtext">
-        Subscribe to get the latest deals straight to your inbox.
-      </p>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Enter your email"
+      />
+      <button onClick={handleSubscribe}>Subscribe</button>
 
-      <div className="newsletter-form">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          className="newsletter-input"
-        />
-        <button onClick={handleSubscribe} className="newsletter-btn">
-          Subscribe
-        </button>
-      </div>
-
-      {message && <p className="newsletter-msg">{message}</p>}
-      <p>Total subscribers: {totalComments}</p>
+      {message && <p>{message}</p>}
+      <p>Total subscribers: {subscribers.length}</p>
     </div>
   );
 };
