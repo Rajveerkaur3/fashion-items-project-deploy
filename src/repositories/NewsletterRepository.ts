@@ -1,4 +1,3 @@
-// src/repositories/NewsletterRepository.ts
 import type { NewsletterSubscriber } from "../data/NewsletterSubscriber";
 import { newsletterTestData } from "../data/newsletterTestData";
 
