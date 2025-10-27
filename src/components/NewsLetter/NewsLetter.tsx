@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Newsletter.css";
 import { useToggle } from "../../hooks/useToggle";
+import { useNewsletter } from "../../hooks/useNewsletter";
 
 interface NewsletterProps {
   totalComments: number;
@@ -9,18 +10,18 @@ interface NewsletterProps {
 
 const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments }) => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  // useToggle for showing/hiding the newsletter form
+  const [localMessage, setLocalMessage] = useState("");
   const [isOpen, toggleIsOpen] = useToggle(false);
+  const { subscribers, message, subscribe } = useNewsletter();
 
   const handleSubscribe = () => {
     if (email.trim()) {
-      setMessage(`🎉 Thanks, ${email}! You’re subscribed for updates.`);
+      subscribe(email);
       setEmail("");
       setTotalComments(totalComments + 1);
+      setLocalMessage("");
     } else {
-      setMessage("⚠️ Please enter a valid email address!");
+      setLocalMessage("⚠️ Please enter a valid email address!");
     }
   };
 
@@ -52,8 +53,12 @@ const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments
             </button>
           </div>
 
-          {message && <p className="newsletter-msg">{message}</p>}
-          <p>Total subscribers: {totalComments}</p>
+          {(message || localMessage) && (
+            <p className="newsletter-msg">{message || localMessage}</p>
+          )}
+
+          <p>Total subscribers: {subscribers.length}</p>
+          <p>Comments tracked: {totalComments}</p>
 
           <button onClick={toggleIsOpen} className="newsletter-close-btn">
             Close
