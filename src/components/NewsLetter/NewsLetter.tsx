@@ -9,19 +9,15 @@ interface NewsletterProps {
 }
 
 const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments }) => {
-  const [email, setEmail] = useState("");
-  const [localMessage, setLocalMessage] = useState("");
-  const [isOpen, toggleIsOpen] = useToggle(false);
   const { subscribers, message, subscribe } = useNewsletter();
+  const [email, setEmail] = useState("");
+  const [isOpen, toggleIsOpen] = useToggle(false);
 
   const handleSubscribe = () => {
     if (email.trim()) {
       subscribe(email);
       setEmail("");
       setTotalComments(totalComments + 1);
-      setLocalMessage("");
-    } else {
-      setLocalMessage("⚠️ Please enter a valid email address!");
     }
   };
 
@@ -53,12 +49,9 @@ const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments
             </button>
           </div>
 
-          {(message || localMessage) && (
-            <p className="newsletter-msg">{message || localMessage}</p>
-          )}
-
+          {message && <p className="newsletter-msg">{message}</p>}
           <p>Total subscribers: {subscribers.length}</p>
-          <p>Comments tracked: {totalComments}</p>
+          <p>Total comments: {totalComments}</p>
 
           <button onClick={toggleIsOpen} className="newsletter-close-btn">
             Close

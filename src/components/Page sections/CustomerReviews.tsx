@@ -1,26 +1,30 @@
 import { useState, type FormEvent } from "react";
 import { AppService } from "../../services/appService";
 import { useInteractions } from "../../hooks/useInteractions";
+import { useReviews } from "../../hooks/useReviews";
 
 export function CustomerReviews() {
+  const { addReview: addReviewHook, deleteReview } = useReviews();
   const [reviews, setReviews] = useState<string[]>([]);
   const [text, setText] = useState("");
 
   const { addInteraction } = useInteractions();
 
-  const addReview = (e: FormEvent) => {
+  const handleAdd = (e: FormEvent) => {
     e.preventDefault();
-    if (text === "") return;
+    if (!text.trim()) return;
 
     const updatedReviews = AppService.addReview(reviews, text);
     setReviews(updatedReviews);
+    addReviewHook(text);
     setText("");
-    addInteraction(); 
+    addInteraction();
   };
 
-  const removeReview = (index: number) => {
+  const handleRemove = (index: number) => {
     const updated = reviews.filter((_, i) => i !== index);
     setReviews(updated);
+    deleteReview(index);
   };
 
   return (
@@ -28,7 +32,7 @@ export function CustomerReviews() {
       <h2>Customer Reviews</h2>
       <p>Total Reviews: {reviews.length}</p>
 
-      <form onSubmit={addReview}>
+      <form onSubmit={handleAdd}>
         <input
           type="text"
           placeholder="Write a review..."
@@ -45,7 +49,7 @@ export function CustomerReviews() {
           {reviews.map((review, i) => (
             <li key={i}>
               {review}{" "}
-              <button onClick={() => removeReview(i)}>Remove</button>
+              <button onClick={() => handleRemove(i)}>Remove</button>
             </li>
           ))}
         </ul>
