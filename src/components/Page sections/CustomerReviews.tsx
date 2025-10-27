@@ -1,15 +1,21 @@
 import { useState, type FormEvent } from "react";
+import { AppService } from "../../services/appService";
+import { useInteractions } from "../../hooks/useInteractions";
 
 export function CustomerReviews() {
   const [reviews, setReviews] = useState<string[]>([]);
   const [text, setText] = useState("");
 
+  const { addInteraction } = useInteractions();
+
   const addReview = (e: FormEvent) => {
     e.preventDefault();
     if (text === "") return;
 
-    setReviews([text, ...reviews]);
+    const updatedReviews = AppService.addReview(reviews, text);
+    setReviews(updatedReviews);
     setText("");
+    addInteraction(); 
   };
 
   const removeReview = (index: number) => {
@@ -20,6 +26,7 @@ export function CustomerReviews() {
   return (
     <div>
       <h2>Customer Reviews</h2>
+      <p>Total Reviews: {reviews.length}</p>
 
       <form onSubmit={addReview}>
         <input
@@ -35,9 +42,10 @@ export function CustomerReviews() {
         <p>No reviews yet.</p>
       ) : (
         <ul>
-          {reviews.map((r, i) => (
+          {reviews.map((review, i) => (
             <li key={i}>
-              {r} <button onClick={() => removeReview(i)}>Remove</button>
+              {review}{" "}
+              <button onClick={() => removeReview(i)}>Remove</button>
             </li>
           ))}
         </ul>
