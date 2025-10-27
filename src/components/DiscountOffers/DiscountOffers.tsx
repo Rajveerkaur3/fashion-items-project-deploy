@@ -1,28 +1,61 @@
+import { useState, useEffect } from "react";
 import "./DiscountOffers.css";
-import shirtImg from "../../assets/shirt.jpg";
-import shoesImg from "../../assets/shoes.jpg";
-import handbagImg from "../../assets/handbag.jpg";
-import watchImg from "../../assets/watch.jpg";
+import { DiscountOfferRepository } from "../../repositories/DiscountOfferRepository";
+import type { DiscountOffer } from "../../data/DiscountOffer";
 
-const offers = [
-  { id: 1, offer: "10% off on Shirts", img: shirtImg },
-  { id: 2, offer: "Buy 1 Get 1 Free Shoes", img: shoesImg },
-  { id: 3, offer: "20% off on Handbags", img: handbagImg },
-  { id: 4, offer: "15% off on Watches", img: watchImg }
-];
+const DiscountOffers: React.FC = () => {
+  const repo = new DiscountOfferRepository();
+  const [offers, setOffers] = useState<DiscountOffer[]>([]);
+  const [savedCoupons, setSavedCoupons] = useState<DiscountOffer[]>([]);
 
-const DiscountOffers = () => {
+  // Load initial offers from repository
+  useEffect(() => {
+    setOffers(repo.getAll());
+  }, []);
+
+  // Save coupon
+  const handleSave = (offer: DiscountOffer) => {
+    if (!savedCoupons.some(c => c.id === offer.id)) {
+      setSavedCoupons([...savedCoupons, offer]);
+    }
+  };
+
+  // Remove coupon from saved list
+  const handleRemove = (id: number) => {
+    setSavedCoupons(savedCoupons.filter(c => c.id !== id));
+  };
+
   return (
     <section className="discount-offers">
-      <h2>Special Discount Offers!!</h2>
+      <h2>Special Discount Offers!</h2>
+
       <div className="offers-container">
-        {offers.map((item) => (
-          <div key={item.id} className="offer-card">
-            <img src={item.img} alt={item.offer} className="offer-img" />
-            <p>{item.offer}</p>
+        {offers.map((offer) => (
+          <div key={offer.id} className="offer-card">
+            <img src={offer.img} alt={offer.title} className="offer-img" />
+            <p>{offer.discount} on {offer.title}</p>
+            <button onClick={() => handleSave(offer)} className="offer-btn">
+              Save Coupon
+            </button>
           </div>
         ))}
       </div>
+
+      {savedCoupons.length > 0 && (
+        <div className="saved-coupons">
+          <h3>Saved Coupons:</h3>
+          <ul>
+            {savedCoupons.map((coupon) => (
+              <li key={coupon.id}>
+                {coupon.discount} on {coupon.title}
+                <button onClick={() => handleRemove(coupon.id)} className="remove-btn">
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 };

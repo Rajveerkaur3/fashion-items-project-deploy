@@ -2,8 +2,6 @@
 import { useState, type FormEvent } from "react";
 import { useReviews } from "../../hooks/useReviews";
 
-
-
 export function CustomerReviews() {
   const { reviews, addReview, deleteReview } = useReviews();
   const [text, setText] = useState("");
@@ -18,6 +16,7 @@ export function CustomerReviews() {
   return (
     <div>
       <h2>Customer Reviews</h2>
+      <p>Total Reviews: {reviews.length}</p>
 
       <form onSubmit={handleAdd}>
         <input
@@ -35,7 +34,8 @@ export function CustomerReviews() {
         <ul>
           {reviews.map((r) => (
             <li key={r.id}>
-              {r.text} <button onClick={() => deleteReview(r.id)}>Remove</button>
+              {r.text}{" "}
+              <button onClick={() => deleteReview(r.id)}>Remove</button>
             </li>
           ))}
         </ul>
