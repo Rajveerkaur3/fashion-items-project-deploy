@@ -45,10 +45,46 @@ main {
 }
 
 .comment-item {
-  padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 15px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .comment-item:last-child {
   border-bottom: none;
+}
+
+.comment-item strong {
+  margin-right: 8px;
+}
+
+.comment-item button {
+  margin-left: 5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.comment-item button:first-of-type {
+  background-color: #28a745; /* Edit button */
+  color: white;
+}
+
+.comment-item button:first-of-type:hover {
+  background-color: #218838;
+}
+
+.comment-item button:last-of-type {
+  background-color: #dc3545; /* Remove button */
+  color: white;
+}
+
+.comment-item button:last-of-type:hover {
+  background-color: #c82333;
 }
