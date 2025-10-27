@@ -9,6 +9,7 @@ import LoginPage from "./components/pages/LoginPage";
 import Discounts from "./components/DiscountOffers/DiscountOffers";
 import Newsletter from "./components/NewsLetter/NewsLetter";
 
+
 function App() {
   const [totalComments, setTotalComments] = useState(0);
 

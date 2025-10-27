@@ -1,32 +1,63 @@
 import { useState } from "react";
-import "./Newsletter.css";
+import "./NewsLetter.css";
+import { useToggle } from "../../hooks/useToggle";
 import { useNewsletter } from "../../hooks/useNewsletter";
 
-//Newsletter component displays subscription form.
-//Uses the custom hook `useNewsletter` for managing subscribers.
+interface NewsletterProps {
+  totalComments: number;
+  setTotalComments: React.Dispatch<React.SetStateAction<number>>;
+}
 
-const Newsletter: React.FC = () => {
+const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments }) => {
   const { subscribers, message, subscribe } = useNewsletter();
   const [email, setEmail] = useState("");
+  const [isOpen, toggleIsOpen] = useToggle(false);
 
   const handleSubscribe = () => {
-    subscribe(email);
-    setEmail("");
+    if (email.trim()) {
+      subscribe(email);
+      setEmail("");
+      setTotalComments(totalComments + 1);
+    }
   };
 
   return (
     <div className="newsletter">
-      <h3>Stay Updated on New Sales!</h3>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-      />
-      <button onClick={handleSubscribe}>Subscribe</button>
+      {!isOpen && (
+        <button onClick={toggleIsOpen} className="newsletter-toggle-btn">
+          Stay Updated on New Sales!
+        </button>
+      )}
 
-      {message && <p>{message}</p>}
-      <p>Total subscribers: {subscribers.length}</p>
+      {isOpen && (
+        <div className="newsletter-form-wrapper">
+          <h3>Stay Updated on New Sales!</h3>
+          <p className="newsletter-subtext">
+            Subscribe to get the latest deals straight to your inbox.
+          </p>
+
+          <div className="newsletter-form">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="newsletter-input"
+            />
+            <button onClick={handleSubscribe} className="newsletter-btn">
+              Subscribe
+            </button>
+          </div>
+
+          {message && <p className="newsletter-msg">{message}</p>}
+          <p>Total subscribers: {subscribers.length}</p>
+          <p>Total comments: {totalComments}</p>
+
+          <button onClick={toggleIsOpen} className="newsletter-close-btn">
+            Close
+          </button>
+        </div>
+      )}
     </div>
   );
 };
