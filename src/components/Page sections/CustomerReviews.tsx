@@ -1,6 +1,6 @@
 
 import { useState, type FormEvent } from "react";
-import { useReviews } from "./hooks/useReviews";
+import { useReviews } from "../../hooks/useReviews";
 
 
 
@@ -10,7 +10,7 @@ export function CustomerReviews() {
 
   const handleAdd = async (e: FormEvent) => {
     e.preventDefault();
-    if (!text) return;
+    if (!text.trim()) return;
     await addReview(text);
     setText("");
   };
@@ -35,8 +35,7 @@ export function CustomerReviews() {
         <ul>
           {reviews.map((r) => (
             <li key={r.id}>
-              {r.text}{" "}
-              <button onClick={() => deleteReview(r.id)}>Remove</button>
+              {r.text} <button onClick={() => deleteReview(r.id)}>Remove</button>
             </li>
           ))}
         </ul>
