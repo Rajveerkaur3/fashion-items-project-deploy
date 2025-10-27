@@ -39,7 +39,7 @@ This document explains the hook-service-repository pattern used in the Newslette
 - Calls NewsletterService for business logic.  
 - Does not directly access repository.
 
-# Usage in project 
+# Usage in project. 
 - Used in the Newsletter component for subscribing users and showing messages.  
 - Can be reused in other components needing newsletter state.
 
