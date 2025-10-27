@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./FashionList.css";
 import { categories } from "../../data/categories";
 
+
 const FashionList = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
