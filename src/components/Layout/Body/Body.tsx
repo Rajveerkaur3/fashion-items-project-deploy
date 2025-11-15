@@ -1,77 +1,29 @@
-/**
- * Body Component
- * 
- * This component displays the hero video, fashion list, and comment section.
- * 
- * It uses the useComments custom hook to manage comments. The hook internally
- * calls the CommentService, which applies business logic and then delegates
- * CRUD operations to the CommentRepository. This structure separates
- * responsibilities and follows the architecture layers:
- * 
- * Component → Hook → Service → Repository
- */
-
 import { useState } from "react";
 import websiteVideo from "../../../assets/Website Video.mp4";
+import newCollectionVideo from "../../../assets/New Collection.mp4";
 import FashionList from "../../FashionList/FashionList";
 import { useComments } from "../../../hooks/useComments";
-import type { Comment } from "../../../types/comment";
-import newCollectionVideo from "../../../assets/New Collection.mp4";
+import { useCommentForm } from "../../../hooks/useCommentForm";
 
 
 import "./Body.css";
 
 export const Body = () => {
-  // Use the custom hook instead of directly calling repository
   const { comments, addComment, updateComment, deleteComment } = useComments();
 
-  const [newComment, setNewComment] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [error, setError] = useState("");
-  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const {
+    newComment,
+    setNewComment,
+    selectedCategory,
+    setSelectedCategory,
+    error,
+    editIndex,
+    handleSubmit,
+    handleEdit,
+    handleDelete,
+  } = useCommentForm(comments, addComment, updateComment, deleteComment);
+
   const [showComments, setShowComments] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (newComment.length < 3) {
-      setError("Comment must be at least 3 characters");
-      return;
-    }
-    if (!selectedCategory) {
-      setError("Please select a category");
-      return;
-    }
-
-    const comment: Comment = { category: selectedCategory, text: newComment };
-
-    try {
-      if (editIndex !== null) {
-        updateComment(editIndex, comment);
-        setEditIndex(null);
-      } else {
-        addComment(comment);
-      }
-
-      setNewComment("");
-      setSelectedCategory("");
-      setError("");
-    } catch (err: any) {
-      setError(err.message);
-    }
-  };
-
-  const handleEdit = (index: number) => {
-    setEditIndex(index);
-    const c = comments[index];
-    setNewComment(c.text);
-    setSelectedCategory(c.category);
-  };
-
-  const handleDelete = (index: number) => {
-    deleteComment(index);
-    if (editIndex === index) setEditIndex(null);
-  };
 
   return (
     <main>
@@ -82,17 +34,15 @@ export const Body = () => {
       </div>
 
       <FashionList />
-      
 
       <section className="comment-section">
         <h2>Leave a Comment</h2>
 
         <div className="extra-video">
-  <video className="new-collection-video" controls>
-    <source src={newCollectionVideo} type="video/mp4" />
-  </video>
-</div>
-
+          <video className="new-collection-video" controls>
+            <source src={newCollectionVideo} type="video/mp4" />
+          </video>
+        </div>
 
         {!showComments && (
           <button
