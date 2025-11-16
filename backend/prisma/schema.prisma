@@ -14,3 +14,10 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  category  String
+  text      String
+  createdAt DateTime @default(now())
+}

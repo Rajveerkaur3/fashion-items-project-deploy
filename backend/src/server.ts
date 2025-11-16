@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { PrismaClient } from "./generated/prisma"; 
+import commentRoutes from "./api/v1/routes/commentRoutes";
 
 const app = express();
 const prisma = new PrismaClient(); 
@@ -12,6 +13,9 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+// Mount comment routes
+app.use("/api/comments", commentRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend running");
