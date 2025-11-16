@@ -1,24 +1,27 @@
-type Subscriber = {
-  id: number;
-  email: string;
-  createdAt: string;
-};
+import { PrismaClient } from "../../../generated/prisma";
 
-const store: Subscriber[] = [];
+const prisma = new PrismaClient();
 
 export default {
-  getAll(): Subscriber[] {
-    // newest first
-    return [...store].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  async getAll() {
+    return await prisma.subscriber.findMany({
+      orderBy: { createdAt: "desc" },
+    });
   },
 
-  create(email: string): Subscriber | null {
-    if (store.some(s => s.email.toLowerCase() === email.toLowerCase())) {
-      return null; // duplicate
+  async create(email: string) {
+    try {
+      const subscriber = await prisma.subscriber.create({
+        data: { email },
+      });
+      return subscriber;
+    } catch (err: any) {
+      // Prisma throws error if email already exists
+      if (err.code === "P2002") {
+        // Unique constraint failed
+        return null;
+      }
+      throw err;
     }
-    const id = store.length ? store[store.length - 1].id + 1 : 1;
-    const rec: Subscriber = { id, email, createdAt: new Date().toISOString() };
-    store.push(rec);
-    return rec;
-  }
+  },
 };
