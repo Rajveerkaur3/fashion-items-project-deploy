@@ -10,7 +10,11 @@ export const getComment = async (id: number) => {
   return repo.getById(id);
 };
 
-export const createComment = async (payload: { category: string; text: string }) => {
+export const createComment = async (payload: {
+  text: string;
+  customerId: number;
+  fashionItemId: number;
+}) => {
   if (!payload.text || payload.text.length < 3) {
     throw new Error("Comment must be at least 3 characters");
   }
@@ -19,7 +23,11 @@ export const createComment = async (payload: { category: string; text: string })
 
 export const updateComment = async (
   id: number,
-  payload: { category?: string; text?: string }
+  payload: {
+    text?: string;
+    customerId?: number;
+    fashionItemId?: number;
+  }
 ) => {
   return repo.update(id, payload);
 };

@@ -3,14 +3,14 @@ import type { Comment } from "../types/comment";
 
 export const useCommentForm = (
   comments: Comment[],
-  addComment: Function,
-  updateComment: Function,
-  deleteComment: Function
+  addComment: (comment: Comment) => void,
+  updateComment: (id: number, comment: Comment) => void,
+  deleteComment: (id: number) => void
 ) => {
   const [newComment, setNewComment] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [error, setError] = useState("");
-  const [editIndex, setEditIndex] = useState<number | null>(null);
+  const [editId, setEditId] = useState<number | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,13 +26,16 @@ export const useCommentForm = (
     }
 
     const comment: Comment = {
-      category: selectedCategory,
       text: newComment,
+      category: selectedCategory,
+      id: editId ?? 0,         // temporary id for new comment
+      customerId: 1,            // replace with logged-in customer id
+      fashionItemId: 1,         // replace with current fashion item id
     };
 
-    if (editIndex !== null) {
-      updateComment(editIndex, comment);
-      setEditIndex(null);
+    if (editId !== null) {
+      updateComment(editId, comment);
+      setEditId(null);
     } else {
       addComment(comment);
     }
@@ -42,16 +45,18 @@ export const useCommentForm = (
     setError("");
   };
 
-  const handleEdit = (index: number) => {
-    const c = comments[index];
-    setEditIndex(index);
-    setNewComment(c.text);
-    setSelectedCategory(c.category);
+  const handleEdit = (id: number) => {
+    const comment = comments.find((c) => c.id === id);
+    if (!comment) return;
+
+    setEditId(id);
+    setNewComment(comment.text);
+    setSelectedCategory(comment.category);
   };
 
-  const handleDelete = (index: number) => {
-    deleteComment(index);
-    if (editIndex === index) setEditIndex(null);
+  const handleDelete = (id: number) => {
+    deleteComment(id);
+    if (editId === id) setEditId(null);
   };
 
   return {
@@ -60,7 +65,7 @@ export const useCommentForm = (
     selectedCategory,
     setSelectedCategory,
     error,
-    editIndex,
+    editId,
     handleSubmit,
     handleEdit,
     handleDelete,
