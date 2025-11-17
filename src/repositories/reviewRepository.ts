@@ -3,34 +3,28 @@ export type Review = {
   text: string;
 };
 
-let reviews: Review[] = [
-  { id: 1, text: "Love the service!" },
-  { id: 2, text: "Fast delivery and friendly staff." },
-  { id: 3, text: "Great experience overall." },
-  { id: 4, text: "Very clean and quick." },
-  { id: 5, text: "Customer support was excellent." },
-  { id: 6, text: "The product quality is good." },
-  { id: 7, text: "Will definitely recommend!" },
-  { id: 8, text: "Satisfied with the service." },
-  { id: 9, text: "Nice and easy process." },
-  { id: 10, text: "Could be a bit faster next time." },
-];
-
+const API_URL = "http://localhost:4000/api/reviews";
 
 export const reviewRepository = {
- 
-  getAll: () => Promise.resolve(reviews),
-
-
-  add: (text: string) => {
-    const newReview = { id: Date.now(), text };
-    reviews.unshift(newReview);
-    return Promise.resolve(newReview);
+  async getAll() {
+    const response = await fetch(API_URL);
+    return response.json();
   },
 
- 
-  remove: (id: number) => {
-    reviews = reviews.filter((r) => r.id !== id);
-    return Promise.resolve(true);
+  async add(text: string) {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+
+    return response.json();
+  },
+
+  
+  async remove(id: number) {
+    await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
   },
 };

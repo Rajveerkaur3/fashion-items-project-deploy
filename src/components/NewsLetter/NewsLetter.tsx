@@ -1,3 +1,4 @@
+// src/components/Newsletter.tsx
 import { useState } from "react";
 import "./NewsLetter.css";
 import { useToggle } from "../../hooks/useToggle";
@@ -9,13 +10,14 @@ interface NewsletterProps {
 }
 
 const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments }) => {
-  const { subscribers, message, subscribe } = useNewsletter();
+  const { subscribers, message, subscribe, loading } = useNewsletter();
   const [email, setEmail] = useState("");
   const [isOpen, toggleIsOpen] = useToggle(false);
 
-  const handleSubscribe = () => {
-    if (email.trim()) {
-      subscribe(email);
+  const handleSubscribe = async () => {
+    if (!email.trim()) return;
+    const result = await subscribe(email);
+    if (result) {
       setEmail("");
       setTotalComments(totalComments + 1);
     }
@@ -44,13 +46,13 @@ const Newsletter: React.FC<NewsletterProps> = ({ totalComments, setTotalComments
               placeholder="Enter your email"
               className="newsletter-input"
             />
-            <button onClick={handleSubscribe} className="newsletter-btn">
-              Subscribe
+            <button onClick={handleSubscribe} className="newsletter-btn" disabled={loading}>
+              {loading ? "Subscribing..." : "Subscribe"}
             </button>
           </div>
 
           {message && <p className="newsletter-msg">{message}</p>}
-          <p>Total subscribers: {subscribers.length}</p>
+          <p>Total subscribers: {subscribers?.length ?? 0}</p>
           <p>Total comments: {totalComments}</p>
 
           <button onClick={toggleIsOpen} className="newsletter-close-btn">

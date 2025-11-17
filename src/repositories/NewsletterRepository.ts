@@ -1,23 +1,36 @@
+// src/repositories/NewsletterRepository.ts
 import type { NewsletterSubscriber } from "../data/NewsletterSubscriber";
-import { newsletterTestData } from "../data/newsletterTestData";
 
-// Shared array to prevent repeating test data
-let subscribers: NewsletterSubscriber[] = [...newsletterTestData];
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export class NewsletterRepository {
-  getAll(): NewsletterSubscriber[] {
-    return subscribers;
+  private base = `${BASE_URL}/newsletter`;
+
+  async getAll(): Promise<NewsletterSubscriber[]> {
+    const res = await fetch(this.base, { method: "GET", headers: { Accept: "application/json" } });
+    if (!res.ok) {
+      throw new Error(`Failed to fetch subscribers (${res.status})`);
+    }
+    return res.json();
   }
 
-  add(email: string): NewsletterSubscriber | null {
-    // Prevent duplicate emails
-    if (subscribers.some(sub => sub.email === email)) return null;
+  async add(email: string): Promise<NewsletterSubscriber | null> {
+    const res = await fetch(this.base, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
 
-    const newSubscriber: NewsletterSubscriber = {
-      id: subscribers.length + 1,
-      email
-    };
-    subscribers.push(newSubscriber);
-    return newSubscriber;
+    if (res.status === 409) {
+      // duplicate
+      return null;
+    }
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(`Failed to add subscriber (${res.status}) ${text}`);
+    }
+
+    return res.json();
   }
 }
