@@ -18,7 +18,7 @@ app.use(express.json());
 // Mount comment routes
 app.use("/api/comments", commentRoutes);
 
-// Mount newsletter routes ✅
+// Mount newsletter routes
 app.use("/newsletter", newsletterRoutes);
 
 app.get("/", (req, res) => {
