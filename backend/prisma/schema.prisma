@@ -43,3 +43,5 @@ model Comment {
   fashionItemId  Int
   fashionItem    FashionItem  @relation(fields: [fashionItemId], references: [id])
 }
+
+
