@@ -26,4 +26,4 @@ model Review {
   id        Int      @id @default(autoincrement())
   text      String
   createdAt DateTime @default(now())
-}
+} 
