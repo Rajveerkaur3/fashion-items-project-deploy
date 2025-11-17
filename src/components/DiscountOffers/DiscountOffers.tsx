@@ -3,6 +3,7 @@ import "./DiscountOffers.css";
 import { DiscountOfferRepository } from "../../repositories/DiscountOfferRepository";
 import type { DiscountOffer } from "../../data/DiscountOffer";
 
+
 const DiscountOffers: React.FC = () => {
   const repo = new DiscountOfferRepository();
   const [offers, setOffers] = useState<DiscountOffer[]>([]);
@@ -26,6 +27,7 @@ const DiscountOffers: React.FC = () => {
   };
 
   return (
+    
     <section className="discount-offers">
       <h2>Special Discount Offers!</h2>
 
@@ -57,6 +59,7 @@ const DiscountOffers: React.FC = () => {
         </div>
       )}
     </section>
+    
   );
 };
 

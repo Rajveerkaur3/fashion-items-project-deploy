@@ -1,13 +1,13 @@
 import React from "react";
 import logo from "../../../assets/Website Logo.jpg";
-import Nav from "../../NavBar/Nav"; 
+
 import "./Header.css";
 
 export const Header: React.FC = () => {
   return (
     <>
       
-      <Nav />
+    
 
       <header className="header">
         
