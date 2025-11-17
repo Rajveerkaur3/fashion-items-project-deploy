@@ -1,26 +1,45 @@
 import type { Comment } from "../types/comment";
-import { commentsTestData } from "../data/commentsTestData";
+
+const BASE_URL = "http://localhost:4000/api/comments";
 
 export class CommentRepository {
-  private comments: Comment[] = [...commentsTestData];
+  // Remove local test data
+  // private comments: Comment[] = [...commentsTestData];
 
-  getAll(): Comment[] {
-    return this.comments;
+  // Get all comments from back-end
+  async getAll(): Promise<Comment[]> {
+    const response = await fetch(BASE_URL);
+    if (!response.ok) throw new Error("Failed to fetch comments");
+    return response.json();
   }
 
-  add(comment: Comment): void {
-    this.comments.push(comment);
+  // Add a new comment via POST
+  async add(comment: Comment): Promise<Comment> {
+    const response = await fetch(BASE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(comment),
+    });
+    if (!response.ok) throw new Error("Failed to add comment");
+    return response.json();
   }
 
-  update(index: number, updatedComment: Comment): void {
-    if (index >= 0 && index < this.comments.length) {
-      this.comments[index] = updatedComment;
-    }
+  // Update comment via PUT
+  async update(id: number, updatedComment: Partial<Comment>): Promise<Comment> {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedComment),
+    });
+    if (!response.ok) throw new Error("Failed to update comment");
+    return response.json();
   }
 
-  remove(index: number): void {
-    if (index >= 0 && index < this.comments.length) {
-      this.comments.splice(index, 1);
-    }
+  // Remove comment via DELETE
+  async remove(id: number): Promise<void> {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to delete comment");
   }
 }
