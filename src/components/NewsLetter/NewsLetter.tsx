@@ -1,4 +1,3 @@
-// src/components/Newsletter.tsx
 import { useState } from "react";
 import "./NewsLetter.css";
 import { useToggle } from "../../hooks/useToggle";
