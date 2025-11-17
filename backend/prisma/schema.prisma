@@ -23,7 +23,7 @@ model Subscriber {
   email     String   @unique
   createdAt DateTime @default(now())
 }
-=======
+
 model Review {
   id        Int      @id @default(autoincrement())
   text      String
