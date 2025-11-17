@@ -1,14 +1,3 @@
-/* Colour Palette for the App:
-   White: #ffffff (backgrounds)
-   Black: black (headings/text)
-   Dark Grey: #333, #444 (newsletter headings & messages)
-   Medium Grey: #666, #ccc (newsletter subtext & input borders)
-   Light Green: lightgreen (footer & about-box borders)
-   Accent Pink: #ff4d6d (newsletter button)
-   Light Yellow: #fff7e6 (offer-card background)
-   Logo Blue: #646cff, #61dafb (logo hover drop shadow)
-*/
-
 
 #root {
   max-width: 1280px;
