@@ -16,9 +16,25 @@ model Comment {
   createdAt DateTime @default(now())
 }
 
+Styling-Rishi-kumar
 // Added Subscriber model for newsletter
 model Subscriber {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   createdAt DateTime @default(now())
 }
+=======
+model Review {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+} 
+
+  id             Int          @id @default(autoincrement())
+  text           String
+  createdAt      DateTime     @default(now())
+  customerId     Int
+  customer       Customer     @relation(fields: [customerId], references: [id])
+  fashionItemId  Int
+  fashionItem    FashionItem  @relation(fields: [fashionItemId], refe
+  develop
