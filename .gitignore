@@ -27,5 +27,3 @@ node_modules/
 package-lock.json
 
 generated\prisma
-migrations
-migartion_lock.toml
