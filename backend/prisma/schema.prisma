@@ -30,16 +30,23 @@ model FashionItem {
   colors      String?  // or Json for array
   price       Float?
   image       String?
-  createdAt   DateTime @default(now())
-  comments    Comment[]
+  createdAt   DateTime 
+  id        Int      @id @default(autoincrement())
+  category  String
+  text      String
+  createdAt DateTime @default(now())
 }
 
-model Comment {
+model Review {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+} 
+
   id             Int          @id @default(autoincrement())
   text           String
   createdAt      DateTime     @default(now())
   customerId     Int
   customer       Customer     @relation(fields: [customerId], references: [id])
   fashionItemId  Int
-  fashionItem    FashionItem  @relation(fields: [fashionItemId], references: [id])
-}
+  fashionItem    FashionItem  @relation(fields: [fashionItemId], refe
