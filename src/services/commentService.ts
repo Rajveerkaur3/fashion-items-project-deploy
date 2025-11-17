@@ -1,3 +1,4 @@
+// src/services/commentService.ts
 import { CommentRepository } from "../repositories/commentRepository";
 import type { Comment } from "../types/comment";
 
@@ -8,20 +9,22 @@ export class CommentService {
     this.repo = new CommentRepository();
   }
 
-  getAllComments(): Comment[] {
-    return this.repo.getAll();
+  async getAllComments(): Promise<Comment[]> {
+    return await this.repo.getAll();
   }
 
-  addComment(comment: Comment) {
+  async addComment(comment: Comment): Promise<Comment> {
     if (comment.text.length < 3) throw new Error("Comment too short");
-    this.repo.add(comment);
+    const added = await this.repo.add(comment);
+    return added; // <-- return the created comment
   }
 
-  updateComment(index: number, comment: Comment) {
-    this.repo.update(index, comment);
+  async updateComment(id: number, comment: Comment): Promise<Comment> {
+    const updated = await this.repo.update(id, comment);
+    return updated; // <-- return the updated comment
   }
 
-  deleteComment(index: number) {
-    this.repo.remove(index);
+  async deleteComment(id: number): Promise<void> {
+    await this.repo.remove(id);
   }
 }

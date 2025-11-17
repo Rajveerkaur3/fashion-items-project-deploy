@@ -5,7 +5,6 @@ import FashionList from "../../FashionList/FashionList";
 import { useComments } from "../../../hooks/useComments";
 import { useCommentForm } from "../../../hooks/useCommentForm";
 
-
 import "./Body.css";
 
 export const Body = () => {
@@ -17,7 +16,7 @@ export const Body = () => {
     selectedCategory,
     setSelectedCategory,
     error,
-    editIndex,
+    editId, // updated
     handleSubmit,
     handleEdit,
     handleDelete,
@@ -74,7 +73,7 @@ export const Body = () => {
               />
 
               <button type="submit">
-                {editIndex !== null ? "Update Comment" : "Add Comment"}
+                {editId !== null ? "Update Comment" : "Add Comment"}
               </button>
 
               {error && <p style={{ color: "red" }}>{error}</p>}
@@ -82,11 +81,11 @@ export const Body = () => {
 
             <div className="comments-display">
               <h3>Comments</h3>
-              {comments.map((c, index) => (
-                <div key={index} className="comment-item">
+              {comments.map((c) => (
+                <div key={c.id} className="comment-item">
                   <strong>{c.category}:</strong> {c.text}{" "}
-                  <button onClick={() => handleEdit(index)}>Edit</button>{" "}
-                  <button onClick={() => handleDelete(index)}>Remove</button>
+                  <button onClick={() => handleEdit(c.id)}>Edit</button>{" "}
+                  <button onClick={() => handleDelete(c.id)}>Remove</button>
                 </div>
               ))}
             </div>

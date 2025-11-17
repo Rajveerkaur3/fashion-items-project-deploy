@@ -15,9 +15,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Customer {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  comments  Comment[]
+}
+
+model FashionItem {
+  id          Int      @id @default(autoincrement())
+  name        String
+  category    String
+  description String?
+  colors      String?  // or Json for array
+  price       Float?
+  image       String?
+  createdAt   DateTime @default(now())
+  comments    Comment[]
+}
+
 model Comment {
-  id        Int      @id @default(autoincrement())
-  category  String
-  text      String
-  createdAt DateTime @default(now())
+  id             Int          @id @default(autoincrement())
+  text           String
+  createdAt      DateTime     @default(now())
+  customerId     Int
+  customer       Customer     @relation(fields: [customerId], references: [id])
+  fashionItemId  Int
+  fashionItem    FashionItem  @relation(fields: [fashionItemId], references: [id])
 }
