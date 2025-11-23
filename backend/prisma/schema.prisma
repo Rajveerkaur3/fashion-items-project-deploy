@@ -1,40 +1,54 @@
+// This is your Prisma schema file
+
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
+model Customer {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  comments  Comment[]
+}
+
+model FashionItem {
+  id          Int      @id @default(autoincrement())
+  name        String
+  category    String
+  description String?
+  colors      String?
+  price       Float?
+  image       String?
+  createdAt   DateTime @default(now())
+  comments    Comment[]
+}
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  category  String
-  text      String
-  createdAt DateTime @default(now())
-}
-
-Styling-Rishi-kumar
-// Added Subscriber model for newsletter
-model Subscriber {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  createdAt DateTime @default(now())
-}
-=======
-model Review {
-  id        Int      @id @default(autoincrement())
-  text      String
-  createdAt DateTime @default(now())
-} 
-
   id             Int          @id @default(autoincrement())
   text           String
   createdAt      DateTime     @default(now())
   customerId     Int
   customer       Customer     @relation(fields: [customerId], references: [id])
   fashionItemId  Int
-  fashionItem    FashionItem  @relation(fields: [fashionItemId], refe
-  develop
+  fashionItem    FashionItem  @relation(fields: [fashionItemId], references: [id])
+}
+
+// Newsletter subscriber
+model Subscriber {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+// Review model (only ONCE)
+model Review {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+}
