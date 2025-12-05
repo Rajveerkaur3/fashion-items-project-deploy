@@ -52,3 +52,10 @@ model Review {
   text      String
   createdAt DateTime @default(now())
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  clerkId  String @unique        // store Clerk user.id here
+  email    String?
+  createdAt DateTime @default(now())
+}
