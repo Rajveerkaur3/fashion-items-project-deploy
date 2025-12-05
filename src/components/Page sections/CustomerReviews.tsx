@@ -1,8 +1,9 @@
-
 import { useState, type FormEvent } from "react";
 import { useReviews } from "../../hooks/useReviews";
+import { useAuth } from "@clerk/clerk-react";
 
 export function CustomerReviews() {
+  const { isSignedIn } = useAuth(); 
   const { reviews, addReview, deleteReview } = useReviews();
   const [text, setText] = useState("");
 
@@ -13,6 +14,15 @@ export function CustomerReviews() {
     setText("");
   };
 
+
+  if (!isSignedIn) {
+    return (
+      <div>
+        <h2>Customer Reviews</h2>
+        <p>Please log in to see and write reviews.</p>
+      </div>
+    );
+  }
   return (
     <div>
       <h2>Customer Reviews</h2>

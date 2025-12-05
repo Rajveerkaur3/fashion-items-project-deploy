@@ -1,32 +1,44 @@
 import { Request, Response } from "express";
+import { getAuth } from "@clerk/express";
 import { reviewService } from "../services/reviewService";
 
-
-export const listReviews = async (_req: Request, res: Response) => {
+export const listReviews = async (req: Request, res: Response) => {
   try {
-    const reviews = await reviewService.getReviews();
+    const { userId } = getAuth(req);
+    if (!userId) return res.status(401).json({ error: "Please log in first" });
+
+    const reviews = await reviewService.getReviews(userId);
     res.json(reviews);
   } catch {
-    res.status(500).json({ error: "Failed to fetch reviews" });
+    res.status(500).json({ error: "Could not load reviews" });
   }
 };
+
 
 export const createReview = async (req: Request, res: Response) => {
   try {
-    const newReview = await reviewService.addReview(req.body.text);
+    const { userId } = getAuth(req);
+    if (!userId) return res.status(401).json({ error: "Please log in first" });
+
+    const text = req.body.text;
+    const newReview = await reviewService.addReview(text, userId);
+
     res.status(201).json(newReview);
   } catch (err: any) {
-    res.status(400).json({ error: err.message || "Failed to add review" });
+    res.status(400).json({ error: err.message || "Could not add review" });
   }
-};
-
-
+}
 export const deleteReview = async (req: Request, res: Response) => {
-  const id = Number(req.params.id);
   try {
-    await reviewService.deleteReview(id);
-    res.json({ message: "Review deleted successfully" });
+    const { userId } = getAuth(req);
+    if (!userId) return res.status(401).json({ error: "Please log in first" });
+
+    const id = Number(req.params.id);
+
+    await reviewService.deleteReview(id, userId);
+
+    res.json({ message: "Review removed" });
   } catch {
-    res.status(400).json({ error: "Failed to delete review" });
+    res.status(400).json({ error: "Could not delete review" });
   }
 };
