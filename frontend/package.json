@@ -8,9 +8,10 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "vercel-build": "vite build --mode production"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.57.0",
