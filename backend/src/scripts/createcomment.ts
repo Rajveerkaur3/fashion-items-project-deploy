@@ -8,8 +8,8 @@ async function main() {
   const comment = await prisma.comment.create({
     data: {
       text: "Great item!",
-      customer: { connect: { id: 1 } }, 
-      fashionItem: { connect: { id: 1 } }, 
+      customer: { connect: { id: 2 } }, 
+      fashionItem: { connect: { id: 2 } }, 
     },
   });
   console.log("Comment created:", comment);

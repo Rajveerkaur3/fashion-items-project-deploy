@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Header } from "../Header/Header";
 import websiteVideo from "../../../assets/Website Video.mp4";
 import newCollectionVideo from "../../../assets/New Collection.mp4";
 import FashionList from "../../FashionList/FashionList";
@@ -16,7 +17,7 @@ export const Body = () => {
     selectedCategory,
     setSelectedCategory,
     error,
-    editId, // updated
+    editId, 
     handleSubmit,
     handleEdit,
     handleDelete,
@@ -26,6 +27,7 @@ export const Body = () => {
 
   return (
     <main>
+      <Header />  
       <div className="hero-video">
         <video className="logo-video" autoPlay loop muted>
           <source src={websiteVideo} type="video/mp4" />
