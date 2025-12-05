@@ -1,23 +1,18 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useToggle } from "../../hooks/useToggle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { SignInButton } from "@clerk/clerk-react";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, togglePassword] = useToggle(false);
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate("/fashion");
-  };
-
   return (
     <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
+
+      <form className="login-form">
         {/* Flex container for one-line layout */}
         <div
           style={{
@@ -75,8 +70,10 @@ const LoginPage = () => {
           </label>
         </div>
 
-        <button type="submit">Login</button>
       </form>
+      <SignInButton mode="modal" forceRedirectUrl="/fashion">
+        <button type="button">Login</button>
+      </SignInButton>
     </div>
   );
 };

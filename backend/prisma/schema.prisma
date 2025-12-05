@@ -1,14 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// This is your Prisma schema file
 
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
-
 
 datasource db {
   provider = "postgresql"
@@ -27,7 +22,7 @@ model FashionItem {
   name        String
   category    String
   description String?
-  colors      String?  // or Json for array
+  colors      String?
   price       Float?
   image       String?
   createdAt   DateTime @default(now())
@@ -44,32 +39,16 @@ model Comment {
   fashionItem    FashionItem  @relation(fields: [fashionItemId], references: [id])
 }
 
-model Review {
-  id        Int      @id @default(autoincrement())
-  text      String
-  createdAt DateTime @default(now())
-}
-
-Styling-Rishi-kumar
-// Added Subscriber model for newsletter
+// Newsletter subscriber
 model Subscriber {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   createdAt DateTime @default(now())
 }
 
+// Review model (only ONCE)
 model Review {
   id        Int      @id @default(autoincrement())
   text      String
   createdAt DateTime @default(now())
-} 
-
-  id             Int          @id @default(autoincrement())
-  text           String
-  createdAt      DateTime     @default(now())
-  customerId     Int
-  customer       Customer     @relation(fields: [customerId], references: [id])
-  fashionItemId  Int
-  fashionItem    FashionItem  @relation(fields: [fashionItemId], refe
-  develop
-
+}
