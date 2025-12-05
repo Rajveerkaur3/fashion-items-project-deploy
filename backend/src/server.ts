@@ -16,7 +16,7 @@ app.use(cors({
 app.use(express.json());
 
 // Mount comment routes
-app.use("/api/comments", commentRoutes);
+app.use("/api/v1/comments", commentRoutes);
 
 // Mount newsletter routes
 app.use("/newsletter", newsletterRoutes);
