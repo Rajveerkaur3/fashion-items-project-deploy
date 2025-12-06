@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useToggle } from "../../hooks/useToggle";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { SignInButton } from "@clerk/clerk-react";
+import { SignInButton, SignUpButton } from "@clerk/clerk-react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +13,6 @@ const LoginPage = () => {
       <h2>Login</h2>
 
       <form className="login-form">
-        {/* Flex container for one-line layout */}
         <div
           style={{
             display: "flex",
@@ -23,7 +22,6 @@ const LoginPage = () => {
             marginBottom: "20px",
           }}
         >
-          {/* Email field */}
           <label style={{ flex: 1 }}>
             Email:
             <input
@@ -35,7 +33,6 @@ const LoginPage = () => {
             />
           </label>
 
-          {/* Password field */}
           <label style={{ flex: 1 }}>
             Password:
             <div
@@ -69,11 +66,17 @@ const LoginPage = () => {
             </div>
           </label>
         </div>
-
       </form>
+
+      {/* Clerk Login button */}
       <SignInButton mode="modal" forceRedirectUrl="/fashion">
         <button type="button">Login</button>
       </SignInButton>
+
+      {/* Optional Clerk SignUp button for registration */}
+      <SignUpButton mode="modal" forceRedirectUrl="/fashion">
+        <button type="button" style={{ marginLeft: "10px" }}>Register</button>
+      </SignUpButton>
     </div>
   );
 };

@@ -59,3 +59,13 @@ model User {
   email    String?
   createdAt DateTime @default(now())
 }
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  message   String   // e.g., "Alex started following you."
+  userId    String   // Clerk user ID of the recipient
+  read      Boolean  @default(false) // whether the alert has been seen
+  createdAt DateTime @default(now()) // timestamp when alert was created
+}
+
+

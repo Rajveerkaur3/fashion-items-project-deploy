@@ -11,6 +11,7 @@ const Nav: React.FC = () => (
       <Link to="/reviews">Customer Reviews</Link>
       <Link to="/about-us">About Us</Link>
       <Link to="/newsletter">Newsletter</Link>
+      <Link to="/notification">Notification</Link>
     </div>
 
     <div className="auth-links">
