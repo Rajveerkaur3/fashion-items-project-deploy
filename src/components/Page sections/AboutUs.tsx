@@ -16,4 +16,4 @@ export function AboutUs() {
       </p>
     </section>
   );
-}
+}  
