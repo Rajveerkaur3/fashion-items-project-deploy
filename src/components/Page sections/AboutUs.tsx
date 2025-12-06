@@ -13,7 +13,6 @@ export function AboutUs() {
       <p>
         At Trand Aura, we’re not just selling clothes – we’re building a
         community of people who love fashion and self-expression.
-
       </p>
     </section>
   );
