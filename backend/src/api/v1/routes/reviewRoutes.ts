@@ -9,4 +9,4 @@ router.get("/", requireAuth(), listReviews);
 router.post("/", requireAuth(), reviewValidation, validate, createReview);
 router.delete("/:id", requireAuth(), deleteReview);
 
-export default router;
+export default router;  
