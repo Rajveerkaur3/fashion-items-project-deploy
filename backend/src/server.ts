@@ -25,6 +25,7 @@ app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/notifications", NotificationRoutes);
 
 
+
 app.get("/", (req, res) => {
   res.send("Backend running");
 });
