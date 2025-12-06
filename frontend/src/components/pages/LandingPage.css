@@ -7,6 +7,7 @@
   text-align: center;
   font-family: Arial, sans-serif;
   padding: 20px;
+  position: relative;
 }
 
 .landing-title {
@@ -32,4 +33,43 @@
 
 .landing-link:hover {
   text-decoration: underline;
+}
+
+/* New styles for notifications button */
+.notifications-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4a6bff;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(74, 107, 255, 0.4);
+  font-weight: bold;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.notifications-button:hover {
+  background-color: #3a5bef;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(74, 107, 255, 0.6);
+}
+
+/* Style for the login message */
+.login-message {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 500px;
+  z-index: 10;
 }

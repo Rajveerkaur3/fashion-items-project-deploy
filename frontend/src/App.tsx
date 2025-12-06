@@ -10,6 +10,7 @@ import LandingPage from "./components/pages/LandingPage";
 import LoginPage from "./components/pages/LoginPage";
 import Discounts from "./components/DiscountOffers/DiscountOffers";
 import Newsletter from "./components/NewsLetter/NewsLetter";
+import Notifications from "./components/pages/Notifications";
 
 function App() {
   const [totalComments, setTotalComments] = useState(0);
@@ -24,7 +25,7 @@ function App() {
       {/* Load entire website ONLY after Clerk is ready */}
       <ClerkLoaded>
         <Routes>
-          {/* Clerk callback route (NEEDED!) */}
+          {/* Clerk callback route  */}
           <Route 
             path="/sso-callback" 
             element={<div>Loading authentication...</div>} 
@@ -40,6 +41,8 @@ function App() {
             <Route path="/discounts" element={<Discounts />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/reviews" element={<CustomerReviews />} />
+            <Route path="/notifications" element={<Notifications />} />
+
             <Route
               path="/newsletter"
               element={
