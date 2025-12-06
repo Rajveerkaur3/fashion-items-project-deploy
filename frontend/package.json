@@ -13,7 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@clerk/clerk-react": "^5.57.0",
+    "@clerk/clerk-react": "^5.58.0",
     "@prisma/client": "^6.19.0",
     "amqplib": "^0.10.9",
     "dotenv": "^17.2.3",

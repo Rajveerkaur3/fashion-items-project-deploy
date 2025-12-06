@@ -32,8 +32,42 @@ CREATE TABLE "Comment" (
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Subscriber" (
+    "id" SERIAL NOT NULL,
+    "email" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Subscriber_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Review" (
+    "id" SERIAL NOT NULL,
+    "text" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "clerkId" TEXT NOT NULL,
+    "email" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Customer_email_key" ON "Customer"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Subscriber_email_key" ON "Subscriber"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_clerkId_key" ON "User"("clerkId");
 
 -- AddForeignKey
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_customerId_fkey" FOREIGN KEY ("customerId") REFERENCES "Customer"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
